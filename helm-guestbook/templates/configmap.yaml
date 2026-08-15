@@ -7,7 +7,7 @@ kind: ConfigMap
 metadata:
   name: {{ template "helm-guestbook.fullname" . }}
   labels:
-  app: {{ template "helm-guestbook.name" . }}
-  chart: {{ template "helm-guestbook.chart" . }}
-  release: {{ .Release.Name }}
-  heritage: {{ .Release.Service }}
+    app: {{ template "helm-guestbook.name" . }}
+    chart: {{ template "helm-guestbook.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
