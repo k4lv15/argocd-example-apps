@@ -6,3 +6,5 @@ metadata:
   name: '{{ template "helm-guestbook.fullname" . }}-db-config'
   annotations:
     argocd.argoproj.io/sync-wave: "1"
+  labels:
+    test: {{ .values.test }}
