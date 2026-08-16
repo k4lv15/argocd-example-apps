@@ -49,4 +49,4 @@ tolerations: []
 affinity: {}
 
 # Just a test parameter to demonstrate how to pass values from values.yaml to templates. You can remove this parameter if you don't need it.
-test: "this-is-working-fine-again"
+test: "this-is-working-fine123"
