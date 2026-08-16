@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: '{{ template "helm-guestbook.fullname" . }}-presync'
+  labels:
+    app: {{ template "helm-guestbook.name" . }}
+    chart: {{ template "helm-guestbook.chart" . }}
+    release: {{ .Release.Name }}
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+    # argocd.argoproj.io/hook: PreSync
+    # argocd.argoproj.io/hook-delete-policy: BeforeHookCreation,HookSucceeded
+spec:
+  template:
+    metadata:
+      labels:
+        app: {{ template "helm-guestbook.name" . }}
+        chart: {{ template "helm-guestbook.chart" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+      - command: ["sh", "-c", "echo 'Running database migrations...'; sleep 10; exit 0"]
+        image: busybox
+        name: presync-job
+        resources: {}
+      restartPolicy: Never
+status: {}
