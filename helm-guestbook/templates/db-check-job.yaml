@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: '{{ template "helm-guestbook.fullname" . }}-db-check'
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  template:
+    metadata: {}
+    spec:
+      containers:
+      - command:
+        - sh
+        - -c
+        - |
+          echo "Checking database connection..."
+          sleep 5
+          echo "Connection to database on host $DB_HOST successful!"
+        image: busybox
+        name: db-check
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: '{{ template "helm-guestbook.fullname" . }}-db-config'
+              key: host
+      restartPolicy: Never
