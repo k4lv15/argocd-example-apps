@@ -4,7 +4,6 @@ metadata:
   name: '{{ template "helm-guestbook.fullname" . }}-db-check'
   annotations:
     argocd.argoproj.io/sync-wave: "2"
-    argocd.argoproj.io/hook-delete-policy: AfterHookSucceeded
 spec:
   template:
     metadata: {}
